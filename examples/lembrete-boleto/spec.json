@@ -1,0 +1,73 @@
+{
+  "title": "Lembrete de boleto pelo WhatsApp",
+  "audio": false,
+  "sections": [
+    {
+      "id": "s1",
+      "key": "S1",
+      "title": "Antes do vencimento",
+      "decisions": [
+        {
+          "tag": "D1",
+          "question": "Quando o cliente deve receber o lembrete do boleto?",
+          "plain": "Hoje o cliente só recebe o boleto no dia em que ele é gerado e depois não ouve mais nada. Muitos esquecem e pagam atrasado. A ideia é mandar um lembrete automático pelo WhatsApp.",
+          "options": {
+            "a": "3 dias antes do vencimento",
+            "b": "No dia do vencimento",
+            "c": "Nos dois momentos"
+          },
+          "optionPlain": {
+            "a": "Dá tempo de o cliente se organizar, mas alguns podem esquecer de novo até o dia.",
+            "b": "Pega o cliente na hora de pagar, mas quem não tem saldo no dia não consegue se planejar.",
+            "c": "Maior chance de pagamento em dia; risco pequeno de o cliente achar que é mensagem demais."
+          },
+          "optionBadge": {
+            "c": "recomendado"
+          },
+          "tech": "Job diário agendado consulta boletos com vencimento em D-3/D0 e dispara template via API WhatsApp (custo por mensagem)."
+        },
+        {
+          "tag": "D2",
+          "question": "Quanto custo por mês aceitamos com essas mensagens?",
+          "plain": "Cada mensagem de WhatsApp tem um custo pequeno. Com muitos clientes, isso soma. Precisamos de um limite pra saber se vale mandar uma ou duas mensagens por boleto.",
+          "options": {
+            "a": "Até R$ 500 por mês",
+            "b": "Até R$ 1.500 por mês",
+            "c": "Sem limite fixo, desde que reduza atraso"
+          },
+          "optionPlain": {
+            "a": "Cabe só um lembrete por boleto na maioria dos meses.",
+            "b": "Cabe mandar os dois lembretes pra todos os clientes.",
+            "c": "Acompanhamos o resultado mês a mês e ajustamos."
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "key": "S2",
+      "title": "Depois do vencimento",
+      "decisions": [
+        {
+          "tag": "D3",
+          "question": "Se o boleto vencer sem pagamento, o que acontece?",
+          "plain": "Hoje o suporte liga pra todo cliente atrasado, um por um. Isso ocupa muito tempo da equipe. Dá pra automatizar o primeiro contato e deixar as ligações só pros casos difíceis.",
+          "options": {
+            "a": "Mensagem automática com link de segunda via",
+            "b": "Continua o suporte ligando pra todos",
+            "c": "Mensagem automática primeiro; suporte liga só se passar 5 dias"
+          },
+          "optionPlain": {
+            "a": "Libera o suporte, mas cliente que precisa negociar fica sem atendimento humano.",
+            "b": "Atendimento mais pessoal, mas continua tomando o dia da equipe.",
+            "c": "Equilíbrio: automação resolve a maioria, humano cuida de quem realmente precisa."
+          },
+          "optionBadge": {
+            "c": "recomendado"
+          },
+          "tech": "Webhook de baixa do banco fecha o fluxo; sem baixa em D+1 dispara template de segunda via; D+5 cria ticket na fila do suporte."
+        }
+      ]
+    }
+  ]
+}

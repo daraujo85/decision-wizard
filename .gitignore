@@ -1,0 +1,22 @@
+# runtime data (contains IPs, geolocation, answers) - never commit
+answers.json
+questions.json
+questions.log
+followups.json
+presence.json
+*.tmp
+server.log
+tunnel.log
+*.pid
+docs/*.html
+docs/*.og.*
+audio/
+diagrams/
+
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+*.env
+graphify-out/
+.jev/
